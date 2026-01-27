@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "clean": "rm -rf .next out"
   },
   "dependencies": {
     "next": "16.1.5",
@@ -14,6 +15,8 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@aws-cicd-monorepo/eslint-config": "workspace:*",
+    "@aws-cicd-monorepo/tsconfig": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

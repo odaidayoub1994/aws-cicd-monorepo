@@ -21,6 +21,7 @@ pnpm-debug.log*
 dist
 .next
 out
+.turbo
 
 # coverage
 coverage
