@@ -7,6 +7,10 @@
   ],
   "scripts": {
     "dev:backend": "yarn workspace backend start:dev",
-    "dev:frontend": "yarn workspace frontend dev"
+    "dev:frontend": "yarn workspace frontend dev",
+    "dc:up": "docker compose up -d",
+    "dc:down": "docker compose down",
+    "dc:logs": "docker compose logs -f",
+    "dc:ps": "docker compose ps"
   }
 }
