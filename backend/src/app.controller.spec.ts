@@ -14,9 +14,31 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
+  describe('getHello', () => {
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toBe('Hello World!');
+    });
+  });
+
+  describe('getHealth', () => {
+    it('should return health status with ok status', () => {
+      const result = appController.getHealth();
+      expect(result.status).toBe('ok');
+    });
+
+    it('should return health status with timestamp', () => {
+      const result = appController.getHealth();
+      expect(result.timestamp).toBeDefined();
+      expect(new Date(result.timestamp).toISOString()).toBe(result.timestamp);
+    });
+
+    it('should return a recent timestamp', () => {
+      const before = new Date();
+      const result = appController.getHealth();
+      const after = new Date();
+      const timestamp = new Date(result.timestamp);
+      expect(timestamp.getTime()).toBeGreaterThanOrEqual(before.getTime());
+      expect(timestamp.getTime()).toBeLessThanOrEqual(after.getTime());
     });
   });
 });
