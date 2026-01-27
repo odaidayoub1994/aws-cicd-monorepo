@@ -1,0 +1,15 @@
+{
+  "name": "@aws-cicd-monorepo/eslint-config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./base.mjs",
+    "./nestjs": "./nestjs.mjs",
+    "./nextjs": "./nextjs.mjs"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript-eslint": "^8.0.0"
+  }
+}
