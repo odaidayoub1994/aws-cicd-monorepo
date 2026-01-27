@@ -94,7 +94,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@aws-cicd-monorepo/shared-types@workspace:packages/shared-types":
+"@aws-cicd-monorepo/shared-types@workspace:*, @aws-cicd-monorepo/shared-types@workspace:packages/shared-types":
   version: 0.0.0-use.local
   resolution: "@aws-cicd-monorepo/shared-types@workspace:packages/shared-types"
   dependencies:
@@ -3250,6 +3250,7 @@ __metadata:
   resolution: "backend@workspace:backend"
   dependencies:
     "@aws-cicd-monorepo/eslint-config": "workspace:*"
+    "@aws-cicd-monorepo/shared-types": "workspace:*"
     "@aws-cicd-monorepo/tsconfig": "workspace:*"
     "@eslint/eslintrc": "npm:^3.2.0"
     "@eslint/js": "npm:^9.18.0"
@@ -5010,6 +5011,7 @@ __metadata:
   resolution: "frontend@workspace:frontend"
   dependencies:
     "@aws-cicd-monorepo/eslint-config": "workspace:*"
+    "@aws-cicd-monorepo/shared-types": "workspace:*"
     "@aws-cicd-monorepo/tsconfig": "workspace:*"
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
