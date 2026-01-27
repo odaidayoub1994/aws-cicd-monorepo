@@ -5,9 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { IValue } from '@aws-cicd-monorepo/shared-types';
 
 @Entity('values')
-export class Value {
+export class Value implements IValue {
   @PrimaryGeneratedColumn()
   id: number;
 
