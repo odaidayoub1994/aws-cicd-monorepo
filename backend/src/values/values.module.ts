@@ -1,0 +1,13 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ValuesService } from './values.service';
+import { ValuesController } from './values.controller';
+import { Value } from './entities/value.entity';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([Value])],
+  controllers: [ValuesController],
+  providers: [ValuesService],
+  exports: [ValuesService],
+})
+export class ValuesModule {}
