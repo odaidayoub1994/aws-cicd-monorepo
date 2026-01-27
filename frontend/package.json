@@ -10,6 +10,7 @@
     "clean": "rm -rf .next out"
   },
   "dependencies": {
+    "@aws-cicd-monorepo/shared-types": "workspace:*",
     "next": "16.1.5",
     "react": "19.2.3",
     "react-dom": "19.2.3"

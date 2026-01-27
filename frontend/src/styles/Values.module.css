@@ -1,0 +1,264 @@
+.page {
+  --background: #fafafa;
+  --foreground: #fff;
+  --text-primary: #000;
+  --text-secondary: #666;
+  --border-color: #e5e5e5;
+  --error-color: #dc2626;
+  --error-bg: #fef2f2;
+  --button-primary: #000;
+  --button-primary-hover: #333;
+  --button-danger: #dc2626;
+  --button-danger-hover: #b91c1c;
+
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+}
+
+.main {
+  width: 100%;
+  max-width: 800px;
+  padding: 48px 24px;
+  background-color: var(--foreground);
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 16px 0 0;
+}
+
+.backLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+}
+
+.error {
+  background-color: var(--error-bg);
+  color: var(--error-color);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.form {
+  background: var(--foreground);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.form h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: var(--text-primary);
+}
+
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--foreground);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--text-primary);
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+}
+
+.formActions button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+  background: var(--button-primary);
+  color: var(--foreground);
+}
+
+.formActions button:hover:not(:disabled) {
+  background: var(--button-primary-hover);
+}
+
+.formActions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: var(--background) !important;
+}
+
+.list {
+  background: var(--foreground);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.list h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: var(--text-primary);
+}
+
+.list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.listItem:last-child {
+  margin-bottom: 0;
+}
+
+.itemContent {
+  flex: 1;
+}
+
+.itemContent strong {
+  display: block;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.itemContent p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+
+.itemContent small {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.itemActions {
+  display: flex;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.itemActions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: 1px solid var(--border-color);
+  background: var(--foreground);
+  color: var(--text-primary);
+}
+
+.itemActions button:hover {
+  background: var(--background);
+}
+
+.deleteButton {
+  color: var(--button-danger) !important;
+  border-color: var(--button-danger) !important;
+}
+
+.deleteButton:hover {
+  background: var(--error-bg) !important;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --background: #0a0a0a;
+    --foreground: #111;
+    --text-primary: #ededed;
+    --text-secondary: #999;
+    --border-color: #333;
+    --error-color: #f87171;
+    --error-bg: #450a0a;
+    --button-primary: #ededed;
+    --button-primary-hover: #d4d4d4;
+    --button-danger: #f87171;
+    --button-danger-hover: #dc2626;
+  }
+
+  .formActions button {
+    color: #111;
+  }
+}
+
+@media (max-width: 600px) {
+  .listItem {
+    flex-direction: column;
+  }
+
+  .itemActions {
+    margin-left: 0;
+    margin-top: 12px;
+  }
+}
