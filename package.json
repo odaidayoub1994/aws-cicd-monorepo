@@ -1,7 +1,10 @@
 {
   "name": "aws-cicd-monorepo",
   "private": true,
-  "workspaces": ["backend", "frontend"],
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "dev:backend": "yarn workspace backend start:dev",
     "dev:frontend": "yarn workspace frontend dev"
