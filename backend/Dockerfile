@@ -30,13 +30,10 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nestjs
 
-# Copy built application
-COPY --from=builder /app/backend/dist ./dist
-COPY --from=builder /app/backend/package.json ./package.json
-
 # Install production dependencies only
 RUN corepack enable && corepack prepare yarn@4.9.1 --activate
 
+# Copy workspace config files
 COPY --from=builder /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
 COPY --from=builder /app/.yarn ./.yarn
 COPY --from=builder /app/packages/shared-types ./packages/shared-types
@@ -44,6 +41,9 @@ COPY --from=builder /app/backend/package.json ./backend/package.json
 
 WORKDIR /app/backend
 RUN yarn workspaces focus --production
+
+# Copy built dist into backend directory
+COPY --from=builder /app/backend/dist ./dist
 
 USER nestjs
 

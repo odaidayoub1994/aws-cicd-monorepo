@@ -18,6 +18,9 @@ COPY frontend ./frontend
 RUN yarn install
 
 # Build shared-types first, then frontend
+ARG NEXT_PUBLIC_API_URL=http://localhost:4000
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 RUN yarn workspace @aws-cicd-monorepo/shared-types build && \
     yarn workspace frontend build
 
@@ -31,9 +34,10 @@ RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
 # Copy built application
-COPY --from=builder /app/frontend/public ./public
+# In a monorepo, standalone output mirrors the project structure
+COPY --from=builder /app/frontend/public ./frontend/public
 COPY --from=builder /app/frontend/.next/standalone ./
-COPY --from=builder /app/frontend/.next/static ./.next/static
+COPY --from=builder /app/frontend/.next/static ./frontend/.next/static
 
 USER nextjs
 
@@ -43,4 +47,4 @@ ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["node", "frontend/server.js"]
