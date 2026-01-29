@@ -11,10 +11,11 @@ COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
 COPY packages/shared-types ./packages/shared-types
 COPY packages/tsconfig ./packages/tsconfig
+COPY packages/eslint-config ./packages/eslint-config
 COPY backend ./backend
 
 # Install dependencies
-RUN yarn install --immutable
+RUN yarn install
 
 # Build shared-types first, then backend
 RUN yarn workspace @aws-cicd-monorepo/shared-types build && \
