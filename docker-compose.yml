@@ -28,7 +28,7 @@ services:
       DB_USER: postgres
       DB_PASS: postgres
       DB_NAME: appdb
-      CORS_ORIGIN: http://localhost:3000
+      CORS_ORIGIN: "*"
     ports:
       - "4000:4000"
     depends_on:
@@ -41,10 +41,10 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: http://localhost:4000
+        NEXT_PUBLIC_API_URL: http://13.63.53.100:4000
     container_name: cicd_frontend
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:4000
+      NEXT_PUBLIC_API_URL: http://13.63.53.100:4000
     ports:
       - "3000:3000"
     depends_on:
