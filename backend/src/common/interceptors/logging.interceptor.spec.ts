@@ -95,7 +95,7 @@ describe('LoggingInterceptor', () => {
     };
 
     interceptor.intercept(mockExecutionContext, errorCallHandler).subscribe({
-      error: (err) => {
+      error: (err: { message: string }) => {
         expect(err.message).toBe('Internal Error');
         done();
       },

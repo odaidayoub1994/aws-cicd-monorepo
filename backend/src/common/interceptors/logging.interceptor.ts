@@ -12,10 +12,12 @@ export class LoggingInterceptor implements NestInterceptor {
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
 
-    const { method, url, body } = request;
+    const method = request.method;
+    const url = request.url;
+    const body = request.body as Record<string, unknown> | undefined;
     const startTime = Date.now();
 
-    const bodyLog = Object.keys(body || {}).length > 0 ? ` Body: ${JSON.stringify(body)}` : '';
+    const bodyLog = Object.keys(body ?? {}).length > 0 ? ` Body: ${JSON.stringify(body)}` : '';
     this.logger.log(`--> ${method} ${url}${bodyLog}`);
 
     return next.handle().pipe(
@@ -24,10 +26,10 @@ export class LoggingInterceptor implements NestInterceptor {
           const duration = Date.now() - startTime;
           this.logger.log(`<-- ${method} ${url} ${response.statusCode} ${duration}ms`);
         },
-        error: (error) => {
+        error: (error: { status?: number; message?: string }) => {
           const duration = Date.now() - startTime;
           this.logger.error(
-            `<-- ${method} ${url} ${error.status || 500} ${duration}ms - ${error.message}`,
+            `<-- ${method} ${url} ${error.status ?? 500} ${duration}ms - ${error.message ?? 'Unknown error'}`,
           );
         },
       }),
