@@ -116,6 +116,6 @@ jobs:
 
             docker compose -f docker-compose.prod.yml pull
 
-            docker compose -f docker-compose.prod.yml up -d --no-deps backend frontend
+            docker compose -f docker-compose.prod.yml up -d
 
             docker image prune -f
