@@ -95,3 +95,27 @@ jobs:
           docker build -f frontend/Dockerfile --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} -t $ECR_REGISTRY/cicd-monorepo/frontend:$IMAGE_TAG -t $ECR_REGISTRY/cicd-monorepo/frontend:latest .
           docker push $ECR_REGISTRY/cicd-monorepo/frontend:$IMAGE_TAG
           docker push $ECR_REGISTRY/cicd-monorepo/frontend:latest
+
+  deploy:
+    name: Deploy to EC2
+    needs: docker-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 374604322207.dkr.ecr.eu-north-1.amazonaws.com
+
+            cd ~/aws-cicd-monorepo
+            git pull origin main
+
+            docker compose -f docker-compose.prod.yml pull
+
+            docker compose -f docker-compose.prod.yml up -d --no-deps backend frontend
+
+            docker image prune -f
