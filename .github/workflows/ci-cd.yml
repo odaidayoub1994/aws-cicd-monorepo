@@ -109,6 +109,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
+            set -e
+
             aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 374604322207.dkr.ecr.eu-north-1.amazonaws.com
 
             cd ~/aws-cicd-monorepo
