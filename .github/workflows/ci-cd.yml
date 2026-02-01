@@ -83,15 +83,15 @@ jobs:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -f backend/Dockerfile -t $ECR_REGISTRY/backend:$IMAGE_TAG -t $ECR_REGISTRY/backend:latest .
-          docker push $ECR_REGISTRY/backend:$IMAGE_TAG
-          docker push $ECR_REGISTRY/backend:latest
+          docker build -f backend/Dockerfile -t $ECR_REGISTRY/cicd-monorepo/backend:$IMAGE_TAG -t $ECR_REGISTRY/cicd-monorepo/backend:latest .
+          docker push $ECR_REGISTRY/cicd-monorepo/backend:$IMAGE_TAG
+          docker push $ECR_REGISTRY/cicd-monorepo/backend:latest
 
       - name: Build and push frontend image
         env:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -f frontend/Dockerfile --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} -t $ECR_REGISTRY/frontend:$IMAGE_TAG -t $ECR_REGISTRY/frontend:latest .
-          docker push $ECR_REGISTRY/frontend:$IMAGE_TAG
-          docker push $ECR_REGISTRY/frontend:latest
+          docker build -f frontend/Dockerfile --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }} -t $ECR_REGISTRY/cicd-monorepo/frontend:$IMAGE_TAG -t $ECR_REGISTRY/cicd-monorepo/frontend:latest .
+          docker push $ECR_REGISTRY/cicd-monorepo/frontend:$IMAGE_TAG
+          docker push $ECR_REGISTRY/cicd-monorepo/frontend:latest
