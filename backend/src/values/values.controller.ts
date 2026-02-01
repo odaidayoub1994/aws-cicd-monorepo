@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ValuesService } from './values.service';
 import { CreateValueDto } from './dto/create-value.dto';
 import { UpdateValueDto } from './dto/update-value.dto';
@@ -32,10 +23,7 @@ export class ValuesController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateValueDto: UpdateValueDto,
-  ) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateValueDto: UpdateValueDto) {
     return this.valuesService.update(id, updateValueDto);
   }
 

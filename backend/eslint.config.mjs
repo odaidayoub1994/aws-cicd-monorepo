@@ -3,7 +3,7 @@ import nestjsConfig from '@aws-cicd-monorepo/eslint-config/nestjs';
 
 export default [
   {
-    ignores: ['eslint.config.mjs', 'dist/**'],
+    ignores: ['eslint.config.mjs', 'dist/**', 'test/**'],
   },
   ...nestjsConfig,
   {

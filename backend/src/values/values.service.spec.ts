@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 import { ValuesService } from './values.service';
 import { Value } from './entities/value.entity';
@@ -9,7 +8,6 @@ import { UpdateValueDto } from './dto/update-value.dto';
 
 describe('ValuesService', () => {
   let service: ValuesService;
-  let repository: jest.Mocked<Repository<Value>>;
 
   const mockValue: Value = {
     id: 1,
@@ -39,7 +37,6 @@ describe('ValuesService', () => {
     }).compile();
 
     service = module.get<ValuesService>(ValuesService);
-    repository = module.get(getRepositoryToken(Value));
 
     jest.clearAllMocks();
   });
@@ -116,9 +113,7 @@ describe('ValuesService', () => {
       mockRepository.findOne.mockResolvedValue(null);
 
       await expect(service.findOne(999)).rejects.toThrow(NotFoundException);
-      await expect(service.findOne(999)).rejects.toThrow(
-        'Value with ID 999 not found',
-      );
+      await expect(service.findOne(999)).rejects.toThrow('Value with ID 999 not found');
     });
   });
 
@@ -156,9 +151,7 @@ describe('ValuesService', () => {
     it('should throw NotFoundException when updating non-existent value', async () => {
       mockRepository.findOne.mockResolvedValue(null);
 
-      await expect(
-        service.update(999, { name: 'Updated' }),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.update(999, { name: 'Updated' })).rejects.toThrow(NotFoundException);
     });
   });
 
