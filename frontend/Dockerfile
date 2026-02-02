@@ -6,16 +6,21 @@ WORKDIR /app
 # Install dependencies for building
 RUN corepack enable && corepack prepare yarn@4.9.1 --activate
 
-# Copy workspace files
+# Copy dependency files first (better layer caching)
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
+COPY packages/shared-types/package.json ./packages/shared-types/package.json
+COPY packages/tsconfig/package.json ./packages/tsconfig/package.json
+COPY packages/eslint-config/package.json ./packages/eslint-config/package.json
+COPY frontend/package.json ./frontend/package.json
+
+# Install dependencies (cached unless lock/package.json changes)
+RUN yarn install
+
+# Copy source code
 COPY packages/shared-types ./packages/shared-types
 COPY packages/tsconfig ./packages/tsconfig
-COPY packages/eslint-config ./packages/eslint-config
 COPY frontend ./frontend
-
-# Install dependencies
-RUN yarn install
 
 # Build shared-types first, then frontend
 ARG NEXT_PUBLIC_API_URL=http://localhost:4000
